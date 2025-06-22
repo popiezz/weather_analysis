@@ -14,6 +14,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// the structure that is sent to supabase
 type weatherData struct {
 	Timestamp   string  `json:"timestamp"`
 	Location    string  `json:"location"`
@@ -31,6 +32,7 @@ type weatherData struct {
 	Is_day      float64 `json:"is_day"`
 }
 
+// the structure that is received from weatherapi
 type WeatherAPIResponse struct {
 	Location struct {
 		Name string `json:"name"`
