@@ -93,14 +93,6 @@ Make sure your Supabase table schema matches these keys and types.
 
 You will see logs every 15 minutes indicating a successful data upload or error.
 
-## Manual Update Trigger
-
-You can manually trigger a data upload using:
-
-```bash
-curl -X POST http://localhost:8080/update
-```
-
 ## Configuration
 
 To change the interval (default: 15 minutes), modify this line in `main.go`:
