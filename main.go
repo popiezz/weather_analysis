@@ -132,10 +132,17 @@ func main() {
 		return
 	}
 	formattedData := formatWeatherData(weather)
-	err = sendDataSupabase(os.Getenv("SUPABASE_API"), os.Getenv("SUPABASE_URL"), formattedData)
-	if err != nil {
-		slog.Error("Supabase insertion failed", slog.Any("err", err))
-		return
-	}
+	interval := time.Minute * 15
+	ticker := time.NewTicker(interval)
+	go func() {
+		for range ticker.C {
+			err = sendDataSupabase(os.Getenv("SUPABASE_API"), os.Getenv("SUPABASE_URL"), formattedData)
+			if err != nil {
+				slog.Error("Supabase insertion failed", slog.Any("err", err))
+			} else {
+				slog.Info("Data sent to Supabase", slog.Any("info", err))
+			}
+		}
+	}()
 	fmt.Println("Montreal weather is :", weather)
 }
